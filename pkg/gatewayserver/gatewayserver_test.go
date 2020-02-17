@@ -653,7 +653,7 @@ func TestGatewayServer(t *testing.T) {
 									GatewayStatus: &ttnpb.GatewayStatus{
 										Time: time.Unix(424242, 0),
 										AntennaLocations: []*ttnpb.Location{
-											&ttnpb.Location{
+											{
 												Source:    ttnpb.SOURCE_GPS,
 												Altitude:  10,
 												Latitude:  12,
@@ -685,7 +685,7 @@ func TestGatewayServer(t *testing.T) {
 									GatewayStatus: &ttnpb.GatewayStatus{
 										Time: time.Unix(42424242, 0),
 										AntennaLocations: []*ttnpb.Location{
-											&ttnpb.Location{
+											{
 												Source:    ttnpb.SOURCE_GPS,
 												Altitude:  10,
 												Latitude:  12,

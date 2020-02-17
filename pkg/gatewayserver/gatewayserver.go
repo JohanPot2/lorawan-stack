@@ -660,12 +660,10 @@ func (gs *GatewayServer) handleLocationUpdates(conn connectionEntry) {
 	if errors.IsUnauthenticated(err) {
 		callOpt = gs.WithClusterAuth()
 	} else if err != nil {
-		logger.WithError(err).Errorf("Not authenticated for location updates")
 		return
 	}
 	registry, err := gs.getRegistry(ctx, &conn.Gateway().GatewayIdentifiers)
 	if err != nil {
-		logger.WithError(err).Errorf("Not authenticated for location updates")
 		return
 	}
 

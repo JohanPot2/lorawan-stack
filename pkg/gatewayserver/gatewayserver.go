@@ -392,7 +392,6 @@ func (gs *GatewayServer) Connect(ctx context.Context, frontend io.Frontend, ids 
 				"schedule_anytime_delay",
 				"schedule_downlink_late",
 				"update_location_from_status",
-				"update_location_from_status_debounce_time",
 			},
 		},
 	}, callOpt)

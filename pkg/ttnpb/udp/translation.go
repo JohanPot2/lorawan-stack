@@ -299,17 +299,14 @@ func FromGatewayUp(up *ttnpb.GatewayUp) (rxs []*RxPacket, stat *Stat, ack *TxPac
 	}
 	if up.GatewayStatus != nil {
 		// TODO: Handle multiple antenna locations
+		stat = &Stat{
+			Time: ExpandedTime(up.GatewayStatus.Time),
+		}
 		if len(up.GatewayStatus.AntennaLocations) > 0 {
-			stat = &Stat{
-				Time: ExpandedTime(up.GatewayStatus.Time),
-				Long: &up.GatewayStatus.AntennaLocations[0].Longitude,
-				Lati: &up.GatewayStatus.AntennaLocations[0].Latitude,
-				Alti: &up.GatewayStatus.AntennaLocations[0].Altitude,
-			}
-		} else {
-			stat = &Stat{
-				Time: ExpandedTime(up.GatewayStatus.Time),
-			}
+			loc := up.GatewayStatus.AntennaLocations[0]
+			stat.Long = &loc.Longitude
+			stat.Lati = &loc.Latitude
+			stat.Alti = &loc.Altitude
 		}
 	}
 	if up.TxAcknowledgment != nil {

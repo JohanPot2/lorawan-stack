@@ -238,7 +238,7 @@ func (c *Connection) HandleStatus(status *ttnpb.GatewayStatus) error {
 
 		antennaLocations := status.GetAntennaLocations()
 		if len(antennaLocations) > 0 && c.gateway.UpdateLocationFromStatus {
-			// TODO: handle multiple antenna locations
+			// TODO: Handle multiple antenna locations (https://github.com/TheThingsNetwork/lorawan-stack/issues/2006).
 			select {
 			case c.locCh <- antennaLocations[0]:
 			default:

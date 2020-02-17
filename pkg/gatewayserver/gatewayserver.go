@@ -680,7 +680,7 @@ func (gs *GatewayServer) handleLocationUpdates(conn connectionEntry) {
 
 			antennas := conn.Gateway().Antennas
 			if location != nil && len(antennas) > 0 {
-				// TODO: handle multiple antenna locations
+				// TODO: Handle multiple antenna locations (https://github.com/TheThingsNetwork/lorawan-stack/issues/2006).
 				location.Source = ttnpb.SOURCE_GPS
 				antennas[0].Location = *location
 

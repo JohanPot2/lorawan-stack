@@ -268,7 +268,7 @@ func (m *Manager) ReadInConfig() error {
 
 		m.viper.SetConfigFile(file)
 		err := m.viper.MergeInConfig()
-		if err != nil {
+		if err != nil && m.inCLIFlags(file) {
 			return err
 		}
 	}

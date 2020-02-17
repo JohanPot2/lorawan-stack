@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Update gateway antenna location from incoming status message (see `update_location_from_status` gateway field and `--gs.update-gateway-location-debounce-time` option).
+  - This requires a database migration (`ttn-lw-stack is-db migrate`) because of the added columns.
+
 ### Changed
 
 - Do not use `personal-files` plugin for snap package.
@@ -30,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Display of error payloads in console event log.
 - Zero coordinate handling in location form in the Console.
-- Update gateway antenna location from incoming status message (see `update_location_from_status` and `update_location_from_status_debounce_time` gateway fields).
 
 ### Fixed
 

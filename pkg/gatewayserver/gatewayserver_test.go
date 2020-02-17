@@ -84,7 +84,8 @@ func TestGatewayServer(t *testing.T) {
 	})
 	c.FrequencyPlans = frequencyplans.NewStore(test.FrequencyPlansFetcher)
 	config := &gatewayserver.Config{
-		RequireRegisteredGateways: false,
+		RequireRegisteredGateways:         false,
+		UpdateGatewayLocationDebounceTime: 0,
 		MQTT: config.MQTT{
 			Listen: ":1882",
 		},

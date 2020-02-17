@@ -776,18 +776,6 @@ func (m *Gateway) ValidateFields(paths ...string) error {
 
 		case "update_location_from_status":
 			// no validation rules for UpdateLocationFromStatus
-		case "update_location_from_status_debounce_time":
-
-			if v, ok := interface{}(m.GetUpdateLocationFromStatusDebounceTime()).(interface{ ValidateFields(...string) error }); ok {
-				if err := v.ValidateFields(subs...); err != nil {
-					return GatewayValidationError{
-						field:  "update_location_from_status_debounce_time",
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
-			}
-
 		default:
 			return GatewayValidationError{
 				field:  name,

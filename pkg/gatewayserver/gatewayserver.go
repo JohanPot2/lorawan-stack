@@ -705,12 +705,7 @@ func (gs *GatewayServer) handleLocationUpdates(conn connectionEntry) {
 				logger.WithError(err).Errorf("Antenna location update failed")
 			}
 
-			duration := time.Second // a sane default
-			if debounceTime := conn.Gateway().UpdateLocationFromStatusDebounceTime; debounceTime != nil {
-				duration = *debounceTime
-			}
-
-			timeout := time.After(duration)
+			timeout := time.After(gs.config.UpdateGatewayLocationDebounceTime)
 			select {
 			case <-ctx.Done():
 				return

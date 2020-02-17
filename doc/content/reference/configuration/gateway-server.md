@@ -13,6 +13,7 @@ The Gateway Server forwards traffic to upstream hosts based on the `gs.forward` 
 ## Security Options
 
 - `gs.require-registered-gateways`: Require the gateways to be registered in the Identity Server
+- `gs.update-gateway-location-debounce-time`: Debounce time between location updates for a single gateway.
 
 ## Basic Station Options
 
@@ -61,4 +62,3 @@ Using the `packet-buffer` and `packet-handlers` options, the throughput of UDP p
 
 - `gs.udp.packet-buffer`: Buffer size of unhandled packets
 - `gs.udp.packet-handlers`: Number of concurrent packet handlers
-

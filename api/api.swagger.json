@@ -9345,10 +9345,6 @@
           "type": "boolean",
           "format": "boolean",
           "title": "update the location of this gateway from status messages"
-        },
-        "update_location_from_status_debounce_time": {
-          "type": "string",
-          "description": "debounce time for gateway location updates from status messages."
         }
       },
       "description": "Gateway is the message that defines a gateway on the network."

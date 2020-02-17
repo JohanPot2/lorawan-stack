@@ -9961,21 +9961,11 @@
             },
             {
               "name": "update_location_from_status",
-              "description": "update the location of this gateway from status messages",
+              "description": "update the location of this gateway from status messages\n\ndebounce time for gateway location updates from status messages.",
               "label": "",
               "type": "bool",
               "longType": "bool",
               "fullType": "bool",
-              "ismap": false,
-              "defaultValue": ""
-            },
-            {
-              "name": "update_location_from_status_debounce_time",
-              "description": "debounce time for gateway location updates from status messages.",
-              "label": "",
-              "type": "Duration",
-              "longType": "google.protobuf.Duration",
-              "fullType": "google.protobuf.Duration",
               "ismap": false,
               "defaultValue": ""
             }

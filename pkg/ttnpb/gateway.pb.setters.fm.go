@@ -509,15 +509,6 @@ func (dst *Gateway) SetFields(src *Gateway, paths ...string) error {
 				var zero bool
 				dst.UpdateLocationFromStatus = zero
 			}
-		case "update_location_from_status_debounce_time":
-			if len(subs) > 0 {
-				return fmt.Errorf("'update_location_from_status_debounce_time' has no subfields, but %s were specified", subs)
-			}
-			if src != nil {
-				dst.UpdateLocationFromStatusDebounceTime = src.UpdateLocationFromStatusDebounceTime
-			} else {
-				dst.UpdateLocationFromStatusDebounceTime = nil
-			}
 
 		default:
 			return fmt.Errorf("invalid field: '%s'", name)

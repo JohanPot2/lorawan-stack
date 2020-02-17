@@ -16,6 +16,7 @@ package shared
 
 import (
 	"fmt"
+	"time"
 
 	"go.thethings.network/lorawan-stack/cmd/internal/shared"
 	"go.thethings.network/lorawan-stack/pkg/config"
@@ -25,7 +26,8 @@ import (
 
 // DefaultGatewayServerConfig is the default configuration for the GatewayServer.
 var DefaultGatewayServerConfig = gatewayserver.Config{
-	RequireRegisteredGateways: false,
+	RequireRegisteredGateways:         false,
+	UpdateGatewayLocationDebounceTime: 60 * time.Minute,
 	Forward: map[string][]string{
 		"": {"00000000/0"},
 	},

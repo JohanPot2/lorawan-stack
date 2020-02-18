@@ -127,9 +127,8 @@ message Gateway {
   google.protobuf.Duration schedule_anytime_delay = 19 [(gogoproto.stdduration) = true, (gogoproto.nullable) = true];
   // update the location of this gateway from status messages
   bool update_location_from_status = 21;
-  // debounce time for gateway location updates from status messages.
 
-  // next: 23
+  // next: 22
 }
 
 message Gateways {

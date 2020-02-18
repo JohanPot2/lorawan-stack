@@ -9961,7 +9961,7 @@
             },
             {
               "name": "update_location_from_status",
-              "description": "update the location of this gateway from status messages\n\ndebounce time for gateway location updates from status messages.",
+              "description": "update the location of this gateway from status messages",
               "label": "",
               "type": "bool",
               "longType": "bool",

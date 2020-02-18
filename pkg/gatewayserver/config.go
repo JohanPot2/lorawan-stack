@@ -39,7 +39,7 @@ type BasicStationConfig struct {
 // Config represents the Gateway Server configuration.
 type Config struct {
 	RequireRegisteredGateways         bool          `name:"require-registered-gateways" description:"Require the gateways to be registered in the Identity Server"`
-	UpdateGatewayLocationDebounceTime time.Duration `name:"update-gateway-location-debounce-time" description:"Debounce time for gateway location updates from status messages`
+	UpdateGatewayLocationDebounceTime time.Duration `name:"update-gateway-location-debounce-time" description:"Debounce time for gateway location updates from status messages"`
 
 	Forward map[string][]string `name:"forward" description:"Forward the DevAddr prefixes to the specified hosts"`
 

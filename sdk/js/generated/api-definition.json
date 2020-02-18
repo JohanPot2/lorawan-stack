@@ -1664,6 +1664,7 @@
         "schedule_downlink_late",
         "status_public",
         "update_channel",
+        "update_location_from_status",
         "updated_at",
         "version_ids",
         "version_ids.brand_id",

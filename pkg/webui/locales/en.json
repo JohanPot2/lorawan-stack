@@ -150,6 +150,7 @@
   "console.components.pubsub-form.messages.tlsClientKey": "Client private key",
   "console.components.pubsub-form.messages.selectPemFile": "Select .pem file…",
   "console.components.pubsub-form.messages.pemFileProvided": ".pem file has been provided",
+  "console.components.pubsub-form.messages.useCredentials": "Use Credentials",
   "console.components.rights-group.index.selectAll": "Select All",
   "console.components.rights-group.index.outOfOwnScopeRights": "This {entityType} has more rights than you have. These rights can not be modified.",
   "console.components.rights-group.index.outOfOwnScopePseudoRight": "This {entityType} has a wildcard right that you don't have. The {entityType} can therefore only be removed entirely.",

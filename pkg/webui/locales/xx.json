@@ -150,6 +150,7 @@
   "console.components.pubsub-form.messages.tlsClientKey": "Xxxxxx xxxxxxx xxx",
   "console.components.pubsub-form.messages.selectPemFile": "Xxxxxx .xxx xxxxx",
   "console.components.pubsub-form.messages.pemFileProvided": ".xxx xxxx xxx xxxx xxxxxxxx",
+  "console.components.pubsub-form.messages.useCredentials": "Xxx Xxxxxxxxxxx",
   "console.components.rights-group.index.selectAll": "Xxxxxx Xxx",
   "console.components.rights-group.index.outOfOwnScopeRights": "Xxxx {entityType} xxx xxxx xxxxxx xxxx xxx xxxx. Xxxxx xxxxxx xxx xxx xx xxxxxxxx.",
   "console.components.rights-group.index.outOfOwnScopePseudoRight": "Xxxx {entityType} xxx x xxxxxxxx xxxxx xxxx xxx xxx'x xxxx. Xxx {entityType} xxx xxxxxxxxx xxxx xx xxxxxxx xxxxxxxx.",

@@ -682,10 +682,6 @@ func (gs *GatewayServer) handleLocationUpdates(conn connectionEntry) {
 				// TODO: Handle multiple antenna locations (https://github.com/TheThingsNetwork/lorawan-stack/issues/2006).
 				location.Source = ttnpb.SOURCE_GPS
 				antennas[0].Location = *location
-
-				conn.UpdateAntennas(antennas)
-			} else {
-				logger.Warnf("No antenna, not updating location")
 			}
 
 			_, err := registry.Update(ctx, &ttnpb.UpdateGatewayRequest{
@@ -701,7 +697,7 @@ func (gs *GatewayServer) handleLocationUpdates(conn connectionEntry) {
 			}, callOpt)
 
 			if err != nil {
-				logger.WithError(err).Errorf("Antenna location update failed")
+				logger.WithError(err).Warn("Failed to update antenna location")
 			}
 
 			timeout := time.After(gs.config.UpdateGatewayLocationDebounceTime)

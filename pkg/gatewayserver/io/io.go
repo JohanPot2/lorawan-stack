@@ -251,11 +251,6 @@ func (c *Connection) HandleStatus(status *ttnpb.GatewayStatus) error {
 	return nil
 }
 
-// UpdateAntennas updates antenna information for gateway
-func (c *Connection) UpdateAntennas(antennas []ttnpb.GatewayAntenna) {
-	c.gateway.Antennas = antennas
-}
-
 // HandleTxAck sends the acknowledgment to the status channel.
 func (c *Connection) HandleTxAck(ack *ttnpb.TxAcknowledgment) error {
 	select {

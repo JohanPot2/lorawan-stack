@@ -73,10 +73,18 @@ export default class PubsubForm extends Component {
     const { initialPubsubValue, update } = this.props
 
     const initialIsMqtt = update && 'mqtt' in initialPubsubValue
-    const initialIsNats = update && 'nats' in initialPubsubValue
     const initialMqttSecure = initialIsMqtt ? initialPubsubValue.mqtt.use_tls : false
-    const initialNatsSecure = initialIsNats
-      ? mapNatsServerUrlToFormValue(initialPubsubValue.nats.server_url).secure
+    const initialUseCredentialsMqtt = initialMqttSecure
+      ? initialPubsubValue.mqtt.username && initialPubsubValue.mqtt.password
+      : false
+
+    const initialIsNats = update && 'nats' in initialPubsubValue
+    const { password, username, secure } = initialIsNats
+      ? mapNatsServerUrlToFormValue(initialPubsubValue.nats.server_url)
+      : { password: undefined, username: undefined, secure: false }
+    const initialNatsSecure = initialIsNats ? secure : false
+    const initialUseCredentialsNats = initialNatsSecure
+      ? Boolean(password) && Boolean(username)
       : false
 
     this.state = {
@@ -84,13 +92,14 @@ export default class PubsubForm extends Component {
       isMqtt: initialIsMqtt,
       mqttSecure: initialMqttSecure,
       natsSecure: initialNatsSecure,
+      mqttUseCredentials: initialUseCredentialsMqtt,
+      natsUseCredentials: initialUseCredentialsNats,
     }
   }
 
   async handleSubmit(values, { setSubmitting, resetForm }) {
     const { appId, onSubmit, onSubmitSuccess, onSubmitFailure } = this.props
     const pubsub = mapFormValuesToPubsub(values, appId)
-
     await this.setState({ error: '' })
 
     try {
@@ -125,6 +134,10 @@ export default class PubsubForm extends Component {
     this.setState({ natsSecure: event.target.checked })
   }
 
+  handleUseCredentialsChangeNats(event) {
+    this.setState({ natsUseCredentials: event.target.checked })
+  }
+
   handleMqttSelect() {
     this.setState({ isMqtt: true })
   }
@@ -133,8 +146,12 @@ export default class PubsubForm extends Component {
     this.setState({ mqttSecure: event.target.checked })
   }
 
+  handleUseCredentialsChangeMqtt(event) {
+    this.setState({ mqttUseCredentials: event.target.checked })
+  }
+
   get natsSection() {
-    const { natsSecure } = this.state
+    const { natsSecure, natsUseCredentials } = this.state
     return (
       <React.Fragment>
         <Message component="h4" content={m.natsConfig} />
@@ -144,19 +161,29 @@ export default class PubsubForm extends Component {
           component={Checkbox}
           onChange={this.handleNatsSecureChange}
         />
+        {natsSecure && (
+          <Form.Field
+            name="nats.use_credentials"
+            title={m.useCredentials}
+            component={Checkbox}
+            onChange={this.handleUseCredentialsChangeNats}
+          />
+        )}
         <Form.Field
           name="nats.username"
           title={sharedMessages.username}
           placeholder={m.usernamePlaceholder}
           component={Input}
-          required={!natsSecure}
+          required={!natsSecure || (natsSecure && natsUseCredentials)}
+          disabled={!natsUseCredentials && natsSecure}
         />
         <Form.Field
           name="nats.password"
           title={sharedMessages.password}
           placeholder={m.passwordPlaceholder}
           component={Input}
-          required={!natsSecure}
+          required={!natsSecure || (natsSecure && natsUseCredentials)}
+          disabled={!natsUseCredentials && natsSecure}
         />
         <Form.Field
           name="nats.address"
@@ -177,7 +204,7 @@ export default class PubsubForm extends Component {
   }
 
   get mqttSection() {
-    const { mqttSecure } = this.state
+    const { mqttSecure, mqttUseCredentials } = this.state
 
     return (
       <React.Fragment>
@@ -233,19 +260,29 @@ export default class PubsubForm extends Component {
           component={Input}
           required
         />
+        {mqttSecure && (
+          <Form.Field
+            name="nats.use_credentials"
+            title={m.useCredentials}
+            component={Checkbox}
+            onChange={this.handleUseCredentialsChangeMqtt}
+          />
+        )}
         <Form.Field
           name="mqtt.username"
           title={sharedMessages.username}
           placeholder={m.usernamePlaceholder}
           component={Input}
-          required={!mqttSecure}
+          required={!mqttSecure || (mqttSecure && mqttUseCredentials)}
+          disabled={!mqttUseCredentials && mqttSecure}
         />
         <Form.Field
           name="mqtt.password"
           title={sharedMessages.password}
           placeholder={m.passwordPlaceholder}
           component={Input}
-          required={!mqttSecure}
+          required={!mqttSecure || (mqttSecure && mqttUseCredentials)}
+          disabled={!mqttUseCredentials && mqttSecure}
         />
         <Form.Field
           title={m.subscribeQos}

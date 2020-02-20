@@ -20,6 +20,7 @@ const natsBlankValues = {
   address: '',
   port: '',
   secure: false,
+  use_credentials: false,
 }
 
 const mqttBlankValues = {
@@ -88,9 +89,16 @@ export const mapPubsubToFormValues = function(pubsub) {
   return result
 }
 
-const mapNatsConfigFormValueToNatsServerUrl = ({ username, password, address, port, secure }) =>
-  `${secure ? 'tls' : 'nats'}://${username ? `${username}:` : ''}${
-    password ? `${password}@` : ''
+const mapNatsConfigFormValueToNatsServerUrl = ({
+  username,
+  password,
+  address,
+  port,
+  secure,
+  use_credentials,
+}) =>
+  `${secure ? 'tls' : 'nats'}://${
+    use_credentials ? `${username}:``${password}@` : ''
   }${address}:${port}`
 
 const mapMessageTypeFormValueToPubsubMessageType = formValue =>

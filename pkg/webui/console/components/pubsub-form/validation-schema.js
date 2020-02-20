@@ -22,8 +22,6 @@ import {
 } from '../../lib/regexp'
 import { qosLevels } from './qos-options'
 
-const toUndefined = value => (!Boolean(value) ? undefined : value)
-
 export default Yup.object().shape({
   pub_sub_id: Yup.string()
     .matches(idRegexp, sharedMessages.validateIdFormat)
@@ -35,29 +33,22 @@ export default Yup.object().shape({
   nats: Yup.object().when('_provider', {
     is: 'nats',
     then: Yup.object().shape({
-      username: Yup.string().when('secure', {
+      username: Yup.string().when('use_credentials', {
         is: true,
         then: Yup.string()
           .matches(idRegexp, sharedMessages.validateIdFormat)
           .min(2, sharedMessages.validateTooShort)
           .max(100, sharedMessages.validateTooLong)
-          .transform(toUndefined),
-        otherwise: Yup.string()
-          .matches(idRegexp, sharedMessages.validateIdFormat)
-          .min(2, sharedMessages.validateTooShort)
-          .max(100, sharedMessages.validateTooLong)
           .required(sharedMessages.validateRequired),
+        otherwise: Yup.object().strip(),
       }),
-      password: Yup.string().when('secure', {
+      password: Yup.string().when('use_credentials', {
         is: true,
         then: Yup.string()
           .min(2, sharedMessages.validateTooShort)
           .max(100, sharedMessages.validateTooLong)
-          .transform(toUndefined),
-        otherwise: Yup.string()
-          .min(2, sharedMessages.validateTooShort)
-          .max(100, sharedMessages.validateTooLong)
           .required(sharedMessages.validateRequired),
+        otherwise: Yup.object().strip(),
       }),
       address: Yup.string()
         .matches(addressRegexp, sharedMessages.validateAddress)
@@ -81,29 +72,22 @@ export default Yup.object().shape({
         .min(2, sharedMessages.validateTooShort)
         .max(23, sharedMessages.validateTooLong)
         .required(sharedMessages.validateRequired),
-      username: Yup.string().when('use_tls', {
+      username: Yup.string().when('use_credentials', {
         is: true,
         then: Yup.string()
           .matches(idRegexp, sharedMessages.validateIdFormat)
           .min(2, sharedMessages.validateTooShort)
           .max(100, sharedMessages.validateTooLong)
-          .transform(toUndefined),
-        otherwise: Yup.string()
-          .matches(idRegexp, sharedMessages.validateIdFormat)
-          .min(2, sharedMessages.validateTooShort)
-          .max(100, sharedMessages.validateTooLong)
           .required(sharedMessages.validateRequired),
+        otherwise: Yup.object().strip(),
       }),
-      password: Yup.string().when('use_tls', {
+      password: Yup.string().when('use_credentials', {
         is: true,
         then: Yup.string()
           .min(2, sharedMessages.validateTooShort)
           .max(100, sharedMessages.validateTooLong)
-          .transform(toUndefined),
-        otherwise: Yup.string()
-          .min(2, sharedMessages.validateTooShort)
-          .max(100, sharedMessages.validateTooLong)
           .required(sharedMessages.validateRequired),
+        otherwise: Yup.object().strip(),
       }),
       subscribe_qos: Yup.string()
         .oneOf(qosLevels, sharedMessages.validateFormat)
